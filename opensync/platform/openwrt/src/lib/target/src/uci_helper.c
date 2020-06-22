@@ -1048,9 +1048,7 @@ bool wifi_setApVlanNetwork(int ssid_index, int vlan_id)
         uci_write_nw(NETWORK_TYPE, tmp, NULL, NETWORK_IFACE_SECTION);
         uci_write_nw(NETWORK_TYPE, tmp, "type", "bridge");
         uci_write_nw(NETWORK_TYPE, tmp, "ifname", eth);
-        uci_write_nw(NETWORK_TYPE, tmp, "proto", "static");
-        uci_write_nw(NETWORK_TYPE, tmp, "ipaddr", "192.168.100.1");
-        uci_write_nw(NETWORK_TYPE, tmp, "netmask", "255.255.255.0");
+        uci_write_nw(NETWORK_TYPE, tmp, "proto", "dhcp");
 
         memset(vendor, 0, sizeof(vendor));
 
