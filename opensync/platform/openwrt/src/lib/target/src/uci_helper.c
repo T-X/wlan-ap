@@ -1043,8 +1043,16 @@ bool wifi_setApVlanNetwork(int ssid_index, int vlan_id)
         snprintf(tmp, sizeof(tmp) - 1, "vlan%d", vlan_id);
 
         memset(eth, 0, sizeof(eth));
-        snprintf(eth, sizeof(eth) - 1, "eth1.%d", vlan_id);
-
+        if (target_platform_version_get(vendor, 128))
+        {
+            if (!strncmp(vendor, "OPENWRT_ECW5410", 14) ||
+                !strncmp(vendor, "OPENWRT_ECW5211", 14))
+                snprintf(eth, sizeof(eth) - 1, "eth0.%d", vlan_id);
+            else if (!strncmp(vendor, "OPENWRT_EA8300", 14))
+                snprintf(eth, sizeof(eth) - 1, "eth1.%d", vlan_id);
+            else
+                snprintf(eth, sizeof(eth) - 1, "eth1.%d", vlan_id);
+        }
         uci_write_nw(NETWORK_TYPE, tmp, NULL, NETWORK_IFACE_SECTION);
         uci_write_nw(NETWORK_TYPE, tmp, "type", "bridge");
         uci_write_nw(NETWORK_TYPE, tmp, "ifname", eth);
