@@ -1050,6 +1050,8 @@ bool wifi_setApVlanNetwork(int ssid_index, int vlan_id)
                 snprintf(eth, sizeof(eth) - 1, "eth0.%d", vlan_id);
             else if (!strncmp(vendor, "OPENWRT_EA8300", 14))
                 snprintf(eth, sizeof(eth) - 1, "eth1.%d", vlan_id);
+            else if (!strncmp(vendor, "OPENWRT_AP2220", 14))
+                snprintf(eth, sizeof(eth) - 1, "eth0.%d", vlan_id);
             else
                 snprintf(eth, sizeof(eth) - 1, "eth1.%d", vlan_id);
         }
